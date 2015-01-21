@@ -1,6 +1,6 @@
 # CoderWally
 
-TODO: Write a gem description
+A very very simple Gem to fetch user badges from Coder Wall
 
 ## Installation
 
@@ -24,7 +24,7 @@ TODO: Write usage instructions here
 
 ## Contributing
 
-1. Fork it ( https://github.com/[my-github-username]/coder_wally/fork )
+1. Fork it ( https://github.com/gregstewart/coder_wally/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
