@@ -1,6 +1,7 @@
 # CoderWally 
 
 [![Build Status](https://travis-ci.org/gregstewart/coder_wally.svg?branch=master)](https://travis-ci.org/gregstewart/coder_wally)
+[![Coverage Status](https://coveralls.io/repos/gregstewart/coder_wally/badge.svg)](https://coveralls.io/r/gregstewart/coder_wally)
 [![Code Climate](https://codeclimate.com/github/gregstewart/coder_wally/badges/gpa.svg)](https://codeclimate.com/github/gregstewart/coder_wally)
 [![Dependency Status](https://gemnasium.com/gregstewart/coder_wally.svg)](https://gemnasium.com/gregstewart/coder_wally)
 [![Inline docs](https://inch-ci.org/github/gregstewart/coder_wally.svg?branch=master)](https://inch-ci.org/github/gregstewart/coder_wally)
