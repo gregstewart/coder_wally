@@ -1,4 +1,4 @@
-# CoderWally
+# CoderWally [![Build Status](https://travis-ci.org/gregstewart/coder_wally.svg?branch=master)](https://travis-ci.org/gregstewart/coder_wally)
 
 A very very simple Gem to fetch user badges from Coder Wall
 
