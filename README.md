@@ -20,7 +20,9 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+For now you can invoke it using (remember to replace <username> with you a valid username):
+
+    ruby -Ilib bin/coder_wally <username>
 
 ## Contributing
 

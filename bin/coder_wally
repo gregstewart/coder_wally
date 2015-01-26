@@ -2,4 +2,5 @@
 
 require 'coder_wally'
 
-puts CoderWally::Url
+puts CoderWally.get_badges_for ARGV[0]
+
