@@ -2,5 +2,7 @@
 
 require 'coder_wally'
 
-puts CoderWally.get_badges_for ARGV[0]
+client = CoderWally::Client.new
+
+puts client.get_badges_for ARGV[0]
 

@@ -2,8 +2,12 @@ require "minitest/autorun"
 require "coder_wally"
 
 describe "Coder Wally" do
+  before do
+    @client = CoderWally::Client.new
+  end
+  
   it "has a default api url" do
-    "https://coderwall.com/%s.json".must_equal CoderWally::Url
+    "https://coderwall.com/%s.json".must_equal @client.api_url
   end
   
   describe "user badges" do
@@ -16,7 +20,7 @@ describe "Coder Wally" do
         end
         
         it "returns a hash of badges" do
-          badges = CoderWally.get_badges_for('me')
+          badges = @client.get_badges_for('me')
           
           badges.count.must_equal 11
           badges.first.name.must_equal "Lab"
@@ -28,12 +32,12 @@ describe "Coder Wally" do
       
       describe "invalid user" do
         it "throws an exception when no user is passed in" do
-          err = ->{ CoderWally.get_badges_for }.must_raise ArgumentError
+          err = ->{ @client.get_badges_for }.must_raise ArgumentError
           err.message.must_match /wrong number/
         end
         
         it "throws an exception when empty string is passed in" do
-          err = ->{ CoderWally.get_badges_for "" }.must_raise ArgumentError
+          err = ->{ @client.get_badges_for "" }.must_raise ArgumentError
           err.message.must_match /Plesae provide a username/
         end
         
@@ -46,7 +50,7 @@ describe "Coder Wally" do
           end
           
           it "throws a UserNotFoundError when the user is not found" do
-            err = ->{ CoderWally.get_badges_for('me')}.must_raise UserNotFoundError
+            err = ->{ @client.get_badges_for('me')}.must_raise UserNotFoundError
             err.message.must_match /User not found/
           end
         end
@@ -61,7 +65,7 @@ describe "Coder Wally" do
         end
         
         it "throws a ServerError when the user is not found" do
-            err = ->{ CoderWally.get_badges_for('me')}.must_raise ServerError
+            err = ->{ @client.get_badges_for('me')}.must_raise ServerError
             err.message.must_match /Server error/
           end
       end
