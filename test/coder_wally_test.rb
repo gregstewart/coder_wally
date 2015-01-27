@@ -1,7 +1,5 @@
 require "minitest/autorun"
-
 require "coder_wally"
-require "webmock/minitest"
 
 describe "Coder Wally" do
   it "has a default api url" do
