@@ -7,10 +7,12 @@ module CoderWally
         def api_url
           "https://coderwall.com/%s.json"
         end
-        
-        def send_request username
-          url = URI.parse(api_url % username)
-          
+        # Build user URI from username and apii url
+        def uri_for_user username
+          URI.parse(api_url % username)
+        end
+        # Dispatch the request
+        def send_request url
           begin
             open(url)
           rescue OpenURI::HTTPError => error
@@ -18,11 +20,11 @@ module CoderWally
             raise ServerError, "Server error" if  error.io.status[0] == "500"
           end
         end
-        
+        # Get bnadges for given user and return has of `Badge`s
         def get_badges_for username
           raise(ArgumentError, "Plesae provide a username") if username.empty?
           
-          json_response = JSON.load(send_request(username))      
+          json_response = JSON.load(send_request(uri_for_user(username)))      
           
           json_response["badges"].map { |badge| Badge.new(badge) }
         end
