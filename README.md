@@ -27,9 +27,16 @@ Or install it yourself as:
 
 ## Usage
 
-For now you can invoke it using (remember to replace <username> with you a valid username):
+After installing the Gem, you can for now you can invoke it 
+(remember to replace <username> with you a valid username) from the command line
+using:
 
     ruby -Ilib bin/coder_wally <username>
+
+In your code:
+
+    client = CoderWally::Client.new
+    client.get_badges_for <username>
 
 ## Contributing
 

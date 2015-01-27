@@ -22,9 +22,9 @@ module CoderWally
         def get_badges_for username
           raise(ArgumentError, "Plesae provide a username") if username.empty?
           
-          response = JSON.load(send_request(username))      
+          json_response = JSON.load(send_request(username))      
           
-          response["badges"].map { |badge| Badge.new(badge) }
+          json_response["badges"].map { |badge| Badge.new(badge) }
         end
     end
 end

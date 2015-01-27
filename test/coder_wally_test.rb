@@ -44,9 +44,9 @@ describe "Coder Wally" do
         describe "not found" do
           before do
             not_found_response = open(File.expand_path(File.dirname(__FILE__) + "/./fixtures/404.json")).read
-              stub_request(:get, "https://coderwall.com/me.json").
-                with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'User-Agent'=>'Ruby'}).
-                to_return(:status => 404, :body => not_found_response, :headers => {})
+            stub_request(:get, "https://coderwall.com/me.json").
+              with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'User-Agent'=>'Ruby'}).
+              to_return(:status => 404, :body => not_found_response, :headers => {})
           end
           
           it "throws a UserNotFoundError when the user is not found" do
@@ -59,15 +59,15 @@ describe "Coder Wally" do
       describe "service throws an error" do
         before do
             server_error = open(File.expand_path(File.dirname(__FILE__) + "/./fixtures/empty.json")).read
-              stub_request(:get, "https://coderwall.com/me.json").
-                with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'User-Agent'=>'Ruby'}).
-                to_return(:status => 500, :body => server_error, :headers => {})
+            stub_request(:get, "https://coderwall.com/me.json").
+              with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'User-Agent'=>'Ruby'}).
+              to_return(:status => 500, :body => server_error, :headers => {})
         end
         
         it "throws a ServerError when the user is not found" do
-            err = ->{ @client.get_badges_for('me')}.must_raise ServerError
-            err.message.must_match /Server error/
-          end
+          err = ->{ @client.get_badges_for('me')}.must_raise ServerError
+          err.message.must_match /Server error/
+        end
       end
   end
 end
