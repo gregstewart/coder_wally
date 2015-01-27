@@ -3,7 +3,7 @@ require "json"
 
 module CoderWally
     class Client
-         # The URL of API we'll use.
+         # The URL of the API we'll use.
         def api_url
           "https://coderwall.com/%s.json"
         end
@@ -20,7 +20,7 @@ module CoderWally
             raise ServerError, "Server error" if  error.io.status[0] == "500"
           end
         end
-        # Get bnadges for given user and return has of `Badge`s
+        # Get badges for given user and return has collection of `Badge`s
         def get_badges_for username
           raise(ArgumentError, "Plesae provide a username") if username.empty?
           
