@@ -33,10 +33,15 @@ using:
 
     ruby -Ilib bin/coder_wally <username>
 
-In your code:
+In order to get a user's badges, you do this:
 
     client = CoderWally::Client.new
     client.get_badges_for <username>
+
+In order to get a user's details, you do this:
+
+    client = CoderWally::Client.new
+    client.get_details_for <username>
 
 ## Contributing
 

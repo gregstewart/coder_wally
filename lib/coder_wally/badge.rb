@@ -1,5 +1,6 @@
 # All code in the gem is namespaced under this module.
 module CoderWally
+    # Stores Badge properties
     class Badge 
         # Object properties 
         attr_reader :name, :badge, :description, :created

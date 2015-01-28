@@ -2,6 +2,7 @@ require "open-uri"
 require "json"
 
 module CoderWally
+    # Client to access the API
     class Client
          # The URL of the API we'll use.
         def api_url
@@ -9,6 +10,8 @@ module CoderWally
         end
         # Build user URI from username and apii url
         def uri_for_user username
+          raise(ArgumentError, "Plesae provide a username") if username.empty?
+          
           URI.parse(api_url % username)
         end
         # Dispatch the request
@@ -22,17 +25,25 @@ module CoderWally
         end
         # Get badges for given user and return has collection of `Badge`s
         def get_badges_for username
-          raise(ArgumentError, "Plesae provide a username") if username.empty?
-          
           json_response = JSON.load(send_request(uri_for_user(username)))      
           
           json_response["badges"].map { |badge| Badge.new(badge) }
         end
+        
+        # Get user details for given user and return a `User` object
+        def get_details_for username
+          json_response = JSON.load(send_request(uri_for_user(username)))      
+        
+          User.new(json_response["name"], json_response["username"],
+            json_response["location"], json_response["team"])
+        end
     end
 end
 
+# Handles user not found exception
 class UserNotFoundError < StandardError
 end
 
+# Handles server exception
 class ServerError < StandardError
 end

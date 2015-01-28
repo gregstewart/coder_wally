@@ -70,4 +70,23 @@ describe "Coder Wally" do
         end
       end
   end
+  
+  describe "user details" do
+    before do
+      success_response = open(File.expand_path(File.dirname(__FILE__) + "/./fixtures/200.json")).read
+      stub_request(:get, "https://coderwall.com/me.json").
+        with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'User-Agent'=>'Ruby'}).
+        to_return(:status => 200, :body => success_response, :headers => {})
+    end
+    
+    it "returns a user" do
+        user = @client.get_details_for('me')
+        
+        user.name.must_equal "Greg Stewart"
+        user.username.must_equal "gregstewart"
+        user.location.must_equal "London, UK"
+        user.team.must_equal nil
+    end
+  end
+
 end
