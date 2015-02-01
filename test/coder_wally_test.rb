@@ -89,4 +89,19 @@ describe "Coder Wally" do
     end
   end
 
+  describe "everything" do
+    before do
+      success_response = open(File.expand_path(File.dirname(__FILE__) + "/./fixtures/200.json")).read
+      stub_request(:get, "https://coderwall.com/me.json").
+        with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'User-Agent'=>'Ruby'}).
+        to_return(:status => 200, :body => success_response, :headers => {})
+    end
+    
+    it "returns a coderwall object" do
+        coderwall = @client.get_everything_for('me')
+        
+        coderwall.must_be_instance_of CoderWally::CoderWall
+    end
+  end
+
 end

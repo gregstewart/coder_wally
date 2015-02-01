@@ -1,3 +1,3 @@
-require "webmock/minitest"
-require "codeclimate-test-reporter"
-CodeClimate::TestReporter.start
+require 'webmock/minitest'
+require 'coveralls'
+Coveralls.wear!
