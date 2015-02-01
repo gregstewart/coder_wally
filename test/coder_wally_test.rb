@@ -1,7 +1,7 @@
-require "minitest/autorun"
-require "coder_wally"
+require 'minitest/autorun'
+require 'coder_wally'
 
-describe "Coder Wally" do
+describe 'Coder Wally' do
   before do
     @client = CoderWally::Client.new
   end

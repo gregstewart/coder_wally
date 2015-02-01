@@ -7,10 +7,10 @@ module CoderWally
         
         # Initialise object with a hash of values
         def initialize(hashed_badge)
-          @name = hashed_badge.fetch("name")
-          @badge = hashed_badge.fetch("badge")
-          @description = hashed_badge.fetch("description") 
-          @created = hashed_badge.fetch("created")
+          @name = hashed_badge.fetch('name')
+          @badge = hashed_badge.fetch('badge')
+          @description = hashed_badge.fetch('description')
+          @created = hashed_badge.fetch('created')
         end
     end
 end
