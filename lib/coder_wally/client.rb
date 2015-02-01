@@ -37,12 +37,6 @@ module CoderWally
           User.new(json_response["name"], json_response["username"],
             json_response["location"], json_response["team"])
         end
-        
-        def get_everything_for username
-          json_response = JSON.load(send_request(uri_for_user(username)))      
-          # (json_response)
-          CoderWall.new
-        end
     end
 end
 
