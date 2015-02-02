@@ -49,7 +49,7 @@ module CoderWally
 
           badges = json_response['badges'].map { |badge| Badge.new(badge) }
           user = User.new(json_response['name'], json_response['username'],
-                   json_response['location'], json_response['team'])
+                   json_response['location'], json_response['team'], json_response['endorsements'])
 
           CoderWall.new badges, user
         end

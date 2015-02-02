@@ -85,7 +85,8 @@ describe 'Coder Wally' do
       user.name.must_equal 'Greg Stewart'
       user.username.must_equal 'gregstewart'
       user.location.must_equal 'London, UK'
-      user.team.must_equal nil
+      user.team.must_be_nil
+      user.endorsements.must_be_kind_of Integer
     end
   end
 
