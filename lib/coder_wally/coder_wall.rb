@@ -4,12 +4,14 @@ module CoderWally
     class CoderWall
       # :badges is the collection of user badges
       # :user is the `User` object
-      attr_reader :badges, :user
+      # :accounts is the `Account` object
+      attr_reader :badges, :user, :accounts
 
       # Instantiate the class with data
-      def initialize(badges, user)
+      def initialize(badges, user, accounts)
         @badges = badges
         @user = user
+        @accounts = accounts
       end
     end
 end

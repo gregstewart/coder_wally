@@ -112,6 +112,10 @@ describe 'Coder Wally' do
       @coder_wall.badges.count.must_equal 11
       @coder_wall.badges.first.must_be_instance_of CoderWally::Badge
     end
+
+    it 'has an accounts property' do
+      @coder_wall.accounts.must_be_instance_of CoderWally::Account
+    end
   end
 
 end
