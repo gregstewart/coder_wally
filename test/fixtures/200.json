@@ -5,7 +5,8 @@
     "endorsements": 0,
     "team": null,
     "accounts": {
-        "github": "gregstewart"
+        "github": "gregstewart",
+        "twitter": "_greg_stewart_"
     },
     "badges": [{
         "name": "Lab",

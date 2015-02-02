@@ -4,11 +4,9 @@ module CoderWally
   class Account
     # Dynamically create account properties
     def initialize(collection_of_accounts)
-      collection_of_accounts.each do |account|
-        account.each do |name, value|
-          singleton_class.class_eval do; attr_accessor "#{name}"; end
-          self.instance_variable_set("@#{name}", value)
-        end
+      collection_of_accounts.each do |account, value|
+        singleton_class.class_eval do; attr_accessor "#{account}"; end
+        self.instance_variable_set("@#{account}", value)
       end
     end
   end
