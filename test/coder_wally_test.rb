@@ -6,10 +6,6 @@ describe 'Coder Wally' do
     @client = CoderWally::Client.new
   end
 
-  it 'has a default api url' do
-    'https://coderwall.com/%s.json'.must_equal @client.api_url
-  end
-
   describe 'user badges' do
     describe 'valid user' do
       before do
