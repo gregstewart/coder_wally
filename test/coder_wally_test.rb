@@ -60,9 +60,23 @@ describe 'Coder Wally' do
           to_return(:status => 500, :body => server_error, :headers => {})
       end
 
-      it 'throws a ServerError when the user is not found' do
+      it 'throws a ServerError when the server response is 500' do
         err = -> { @client.get_badges_for('me') }.must_raise ServerError
         err.message.must_match /Server error/
+      end
+    end
+
+    describe 'bad data' do
+      before do
+        bad_data = open(File.expand_path(File.dirname(__FILE__) + '/./fixtures/bad.json')).read
+        stub_request(:get, 'https://coderwall.com/me.json').
+          with(:headers => {'Accept' => '*/*', 'Accept-Encoding' => 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'User-Agent' => 'Ruby'}).
+          to_return(:status => 200, :body => bad_data, :headers => {})
+      end
+
+      it 'throws a InvalidJson exception when bad JSON is returned' do
+        err = -> { @client.get_badges_for('me') }.must_raise InvalidJson
+        err.message.must_match /invalid json/
       end
     end
   end

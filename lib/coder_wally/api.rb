@@ -7,7 +7,13 @@ module CoderWally
     # Fetch data from CoderWall
     def fetch(username)
       uri = uri_for_user(username)
-      JSON.load(send_request(uri))
+      json = send_request(uri)
+
+      begin
+        JSON.parse(json.read)
+      rescue JSON::ParserError => error
+        raise InvalidJson, 'Received invalid json in response'
+      end
     end
 
     private
@@ -55,4 +61,7 @@ end
 
 # Handles server exception
 class ServerError < StandardError
+end
+# Handles bad JSON
+class InvalidJson < StandardError
 end
