@@ -1,21 +1,27 @@
 module CoderWally
+  # Builds the CoderWall object from the response
   class Builder
+    # Instantiate class
     def initialize
     end
 
-    def parse_badges(json_response)
-      json_response['badges'].map { |badge| Badge.new(badge) }
+    # parse badges from data
+    def parse_badges(data)
+      data['badges'].map { |badge| Badge.new(badge) } if data['badges']
     end
 
-    def parse_accounts(json_response)
-      Account.new(json_response['accounts'])
+    # parse account information from data
+    def parse_accounts(data)
+      Account.new(data['accounts']) if data['accounts']
     end
 
-    def parse_user(json_response)
-      User.new(json_response['name'], json_response['username'],
-               json_response['location'], json_response['team'], json_response['endorsements'])
+    # parse user information from data
+    def parse_user(data)
+      User.new(data['name'], data['username'],
+               data['location'], data['team'], data['endorsements'])
     end
 
+    # build CoderWall object from API response
     def build response
       badges = parse_badges(response)
       accounts = parse_accounts(response)
@@ -23,6 +29,5 @@ module CoderWally
 
       CoderWall.new badges, user, accounts
     end
-
   end
 end

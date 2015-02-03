@@ -1,7 +1,7 @@
 module CoderWally
     # Client to access the API
     class Client
-
+        # Instantiate class
         def initialize
           @api = API.new
           @builder = Builder.new

@@ -2,7 +2,9 @@ require 'open-uri'
 require 'json'
 
 module CoderWally
+  # API Class
   class API
+    # Fetch data from CoderWall
     def fetch(username)
       uri = uri_for_user(username)
       JSON.load(send_request(uri))
