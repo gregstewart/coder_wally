@@ -1,7 +1,8 @@
 # CoderWally 
 
+[![Build Status](https://circleci.com/gh/gregstewart/coder_wally.svg?style=badge)](https://circleci.com/gh/gregstewart/coder_wally)
+
 [![Gem Version](https://badge.fury.io/rb/coder_wally.svg)](http://badge.fury.io/rb/coder_wally)
-[![Build Status](https://circleci.com/gh/gregstewart/coder_wally.svg?style=shield)](https://circleci.com/gh/gregstewart/coder_wally)
 [![Coverage Status](https://coveralls.io/repos/gregstewart/coder_wally/badge.svg)](https://coveralls.io/r/gregstewart/coder_wally)
 [![Code Climate](https://codeclimate.com/github/gregstewart/coder_wally/badges/gpa.svg)](https://codeclimate.com/github/gregstewart/coder_wally)
 [![Dependency Status](https://gemnasium.com/gregstewart/coder_wally.svg)](https://gemnasium.com/gregstewart/coder_wally)
