@@ -4,15 +4,19 @@ require 'coder_wally'
 describe 'Coder Wally' do
   before do
     @client = CoderWally::Client.new
+    @accept_encoding = 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3'
+    @success_fixture = File.dirname(__FILE__) + '/./fixtures/200.json'
   end
 
   describe 'user badges' do
     describe 'valid user' do
       before do
-        success_response = open(File.expand_path(File.dirname(__FILE__) + '/./fixtures/200.json')).read
-        stub_request(:get, 'https://coderwall.com/me.json').
-          with(:headers => {'Accept' => '*/*', 'Accept-Encoding' => 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'User-Agent' => 'Ruby'}).
-          to_return(:status => 200, :body => success_response, :headers => {})
+        success_response = open(File.expand_path(@success_fixture)).read
+        stub_request(:get, 'https://coderwall.com/me.json')
+          .with(headers: { 'Accept' => '*/*',
+                           'Accept-Encoding' => @accept_encoding,
+                           'User-Agent' => 'Ruby' })
+          .to_return(status: 200, body:  success_response, headers: {})
       end
 
       it 'returns a hash of badges' do
@@ -29,64 +33,75 @@ describe 'Coder Wally' do
     describe 'invalid user' do
       it 'throws an exception when no user is passed in' do
         err = -> { @client.get_badges_for }.must_raise ArgumentError
-        err.message.must_match /wrong number/
+        err.message.must_match(/wrong number/)
       end
 
       it 'throws an exception when empty string is passed in' do
         err = -> { @client.get_badges_for '' }.must_raise ArgumentError
-        err.message.must_match /Please provide a username/
+        err.message.must_match(/Please provide a username/)
       end
 
       describe 'not found' do
         before do
-          not_found_response = open(File.expand_path(File.dirname(__FILE__) + '/./fixtures/404.json')).read
-          stub_request(:get, 'https://coderwall.com/me.json').
-            with(:headers => {'Accept' => '*/*', 'Accept-Encoding' => 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'User-Agent' => 'Ruby'}).
-            to_return(:status => 404, :body => not_found_response, :headers => {})
+          not_found_fixture = File.dirname(__FILE__) + '/./fixtures/404.json'
+          not_found_response = open(File.expand_path(not_found_fixture)).read
+          stub_request(:get, 'https://coderwall.com/me.json')
+            .with(headers: { 'Accept' => '*/*',
+                             'Accept-Encoding' => @accept_encoding,
+                             'User-Agent' => 'Ruby' })
+            .to_return(status: 404, body:  not_found_response, headers: {})
         end
 
         it 'throws a UserNotFoundError when the user is not found' do
           err = -> { @client.get_badges_for('me') }.must_raise UserNotFoundError
-          err.message.must_match /User not found/
+          err.message.must_match(/User not found/)
         end
       end
     end
 
     describe 'service throws an error' do
       before do
-        server_error = open(File.expand_path(File.dirname(__FILE__) + '/./fixtures/empty.json')).read
-        stub_request(:get, 'https://coderwall.com/me.json').
-          with(:headers => {'Accept' => '*/*', 'Accept-Encoding' => 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'User-Agent' => 'Ruby'}).
-          to_return(:status => 500, :body => server_error, :headers => {})
+        empty_fixture = File.dirname(__FILE__) + '/./fixtures/empty.json'
+        server_error = open(File.expand_path(empty_fixture)).read
+        stub_request(:get, 'https://coderwall.com/me.json')
+          .with(headers: { 'Accept' => '*/*',
+                           'Accept-Encoding' => @accept_encoding,
+                           'User-Agent' => 'Ruby' })
+          .to_return(status: 500, body:  server_error, headers: {})
       end
 
       it 'throws a ServerError when the server response is 500' do
         err = -> { @client.get_badges_for('me') }.must_raise ServerError
-        err.message.must_match /Server error/
+        err.message.must_match(/Server error/)
       end
     end
 
     describe 'bad data' do
       before do
-        bad_data = open(File.expand_path(File.dirname(__FILE__) + '/./fixtures/bad.json')).read
-        stub_request(:get, 'https://coderwall.com/me.json').
-          with(:headers => {'Accept' => '*/*', 'Accept-Encoding' => 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'User-Agent' => 'Ruby'}).
-          to_return(:status => 200, :body => bad_data, :headers => {})
+        bad_json_fixture = File.dirname(__FILE__) + '/./fixtures/bad.json'
+        bad_data = open(File.expand_path(bad_json_fixture)).read
+        stub_request(:get, 'https://coderwall.com/me.json')
+          .with(headers: { 'Accept' => '*/*',
+                           'Accept-Encoding' => @accept_encoding,
+                           'User-Agent' => 'Ruby' })
+          .to_return(status: 200, body:  bad_data, headers: {})
       end
 
       it 'throws a InvalidJson exception when bad JSON is returned' do
         err = -> { @client.get_badges_for('me') }.must_raise InvalidJson
-        err.message.must_match /invalid json/
+        err.message.must_match(/invalid json/)
       end
     end
   end
 
   describe 'user details' do
     before do
-      success_response = open(File.expand_path(File.dirname(__FILE__) + '/./fixtures/200.json')).read
-      stub_request(:get, 'https://coderwall.com/me.json').
-        with(:headers => {'Accept' => '*/*', 'Accept-Encoding' => 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'User-Agent' => 'Ruby'}).
-        to_return(:status => 200, :body => success_response, :headers => {})
+      success_response = open(File.expand_path(@success_fixture)).read
+      stub_request(:get, 'https://coderwall.com/me.json')
+        .with(headers: { 'Accept' => '*/*',
+                         'Accept-Encoding' => @accept_encoding,
+                         'User-Agent' => 'Ruby' })
+        .to_return(status: 200, body:  success_response, headers: {})
     end
 
     it 'returns a user' do
@@ -102,10 +117,12 @@ describe 'Coder Wally' do
 
   describe 'everything' do
     before do
-      success_response = open(File.expand_path(File.dirname(__FILE__) + '/./fixtures/200.json')).read
-      stub_request(:get, 'https://coderwall.com/me.json').
-        with(:headers => {'Accept' => '*/*', 'Accept-Encoding' => 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'User-Agent' => 'Ruby'}).
-        to_return(:status => 200, :body => success_response, :headers => {})
+      success_response = open(File.expand_path(@success_fixture)).read
+      stub_request(:get, 'https://coderwall.com/me.json')
+        .with(headers: { 'Accept' => '*/*',
+                         'Accept-Encoding' => @accept_encoding,
+                         'User-Agent' => 'Ruby' })
+        .to_return(status: 200, body:  success_response, headers: {})
 
       @coder_wall = @client.get_everything_for('me')
     end
@@ -127,5 +144,4 @@ describe 'Coder Wally' do
       @coder_wall.accounts.must_be_instance_of CoderWally::Account
     end
   end
-
 end

@@ -3,7 +3,7 @@ require 'coder_wally/account'
 
 describe 'Account' do
   it 'creates an account object with dynamic attributes' do
-    json_parsed = {'github' => 'gregstewart', 'twitter' => '_greg_stewart_'}
+    json_parsed = { 'github' => 'gregstewart', 'twitter' => '_greg_stewart_' }
 
     account = CoderWally::Account.new(json_parsed)
 
