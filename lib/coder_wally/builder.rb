@@ -22,7 +22,7 @@ module CoderWally
     end
 
     # build CoderWall object from API response
-    def build response
+    def build(response)
       badges = parse_badges(response)
       accounts = parse_accounts(response)
       user = parse_user(response)

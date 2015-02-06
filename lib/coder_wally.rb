@@ -6,4 +6,3 @@ require 'coder_wally/coder_wall'
 require 'coder_wally/api'
 require 'coder_wally/builder'
 require 'coder_wally/client'
-
