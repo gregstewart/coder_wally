@@ -3,4 +3,4 @@ AllCops:
     - coder_wally.gemspec
     - Rakefile
 
-#inherit_from: .rubocop_todo.yml
+inherit_from: .rubocop_todo.yml
