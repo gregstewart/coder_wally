@@ -16,15 +16,12 @@ module CoderWally
       end
     end
 
-    private
-
+  private
     # Dispatch the request
     def send_request(url)
       open(url)
     rescue OpenURI::HTTPError => error
-      status_code = StatusCodeFromError.new(error).get_status_code
-      fail ServerError, 'Server error' if status_code == '500'
-      fail UserNotFoundError, 'User not found' if status_code == '404'
+      ExceptionHandler.new(error)
     end
 
     # Build user URI from username and api url
@@ -40,13 +37,7 @@ module CoderWally
     end
   end
 end
-# Handles user not found exception
-class UserNotFoundError < StandardError
-end
 
-# Handles server exception
-class ServerError < StandardError
-end
 # Handles bad JSON
 class InvalidJson < StandardError
 end
