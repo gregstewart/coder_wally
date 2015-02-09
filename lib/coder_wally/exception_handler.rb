@@ -1,6 +1,7 @@
 module CoderWally
   # Raises errors from the service request
   class ExceptionHandler
+    # Initialize with the error object
     def initialize(error)
       status_code = StatusCodeFromError.new(error).get_status_code
       fail ServerError, 'Server error' if status_code == '500'

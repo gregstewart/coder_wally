@@ -10,6 +10,7 @@ module CoderWally
       badges.map { |badge| create_new_badge(badge) } if badges
     end
 
+    # create a new badge object
     def create_new_badge(badge)
       Badge.new(badge)
     end
