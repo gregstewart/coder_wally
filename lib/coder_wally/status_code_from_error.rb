@@ -8,22 +8,22 @@ module CoderWally
     end
 
     # Get the status code
-    def get_status_code
-      @error.io.status[0] if has_error && has_io && has_status_code
+    def status_code
+      @error.io.status[0] if error? && io? && status_code?
     end
 
     # Is there an error object?
-    def has_error
+    def error?
       true if @error
     end
 
     # Is there an io object?
-    def has_io
+    def io?
       true if @error.io
     end
 
     # Is there a status?
-    def has_status_code
+    def status_code?
       true if @error.io.status
     end
   end

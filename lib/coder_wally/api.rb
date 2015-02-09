@@ -16,7 +16,8 @@ module CoderWally
       end
     end
 
-  private
+    private
+
     # Dispatch the request
     def send_request(url)
       open(url)
