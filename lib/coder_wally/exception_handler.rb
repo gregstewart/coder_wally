@@ -3,7 +3,7 @@ module CoderWally
   class ExceptionHandler
     # Initialize with the error object
     def initialize(error)
-      status_code = StatusCodeFromError.new(error).get_status_code
+      status_code = StatusCodeFromError.new(error).status_code
       fail ServerError, 'Server error' if status_code == '500'
       fail UserNotFoundError, 'User not found' if status_code == '404'
     end

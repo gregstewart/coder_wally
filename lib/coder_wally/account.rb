@@ -10,11 +10,11 @@ module CoderWally
       end
     end
     # create the attribute accessor
-    def create_accessor name
+    def create_accessor(name)
       singleton_class.class_eval { attr_accessor "#{name}" }
     end
     # assign the value to the accessor
-    def set_accessor_value name, value
+    def set_accessor_value(name, value)
       instance_variable_set("@#{name}", value)
     end
   end
