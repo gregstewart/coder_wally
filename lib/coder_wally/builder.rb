@@ -7,7 +7,11 @@ module CoderWally
 
     # parse badges from data
     def parse_badges(badges)
-      badges.map { |badge| Badge.new(badge) } if badges
+      badges.map { |badge| create_new_badge(badge) } if badges
+    end
+
+    def create_new_badge(badge)
+      Badge.new(badge)
     end
 
     # parse account information from data
