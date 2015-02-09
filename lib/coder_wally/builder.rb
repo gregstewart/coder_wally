@@ -17,8 +17,7 @@ module CoderWally
 
     # parse user information from data
     def parse_user(data)
-      User.new(data['name'], data['username'],
-               data['location'], data['team'], data['endorsements'])
+      User.new(data)
     end
 
     # build CoderWall object from API response

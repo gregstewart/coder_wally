@@ -40,7 +40,6 @@ module CoderWally
     end
   end
 end
-
 # Handles user not found exception
 class UserNotFoundError < StandardError
 end
