@@ -6,12 +6,12 @@ module CoderWally
     attr_reader :name, :username, :location, :team, :endorsements
 
     # Initialise object with a hash of values
-    def initialize(name, username, location, team, endorsements)
-      @name = name
-      @username = username
-      @location = location
-      @team = team
-      @endorsements = endorsements
+    def initialize(data)
+      @name = data['name']
+      @username = data['username']
+      @location = data['location']
+      @team = data['team']
+      @endorsements = data['endorsements']
     end
   end
 end
