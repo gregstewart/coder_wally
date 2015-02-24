@@ -1,12 +1,13 @@
 # CoderWally 
 
-[![Build Status](https://circleci.com/gh/gregstewart/coder_wally.svg?style=badge)](https://circleci.com/gh/gregstewart/coder_wally)
+[![Build Status](https://circleci.com/gh/gregstewart/coder_wally.svg?style=badge)](https://circleci.com/gh/gregstewart/coder_wally) 
 
 [![Gem Version](https://badge.fury.io/rb/coder_wally.svg)](http://badge.fury.io/rb/coder_wally)
 [![Coverage Status](https://coveralls.io/repos/gregstewart/coder_wally/badge.svg)](https://coveralls.io/r/gregstewart/coder_wally)
 [![Code Climate](https://codeclimate.com/github/gregstewart/coder_wally/badges/gpa.svg)](https://codeclimate.com/github/gregstewart/coder_wally)
 [![Dependency Status](https://gemnasium.com/gregstewart/coder_wally.svg)](https://gemnasium.com/gregstewart/coder_wally)
 [![Inline docs](https://inch-ci.org/github/gregstewart/coder_wally.svg?branch=master)](https://inch-ci.org/github/gregstewart/coder_wally)
+[![coder_wally API Documentation](https://www.omniref.com/ruby/gems/coder_wally.png)](https://www.omniref.com/ruby/gems/coder_wally)
 
 A very very simple Gem to fetch user badges from Coder Wall
 
