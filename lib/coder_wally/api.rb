@@ -4,13 +4,20 @@ require 'json'
 module CoderWally
   # API Class
   class API
+    attr_reader :response
+    def initialize
+      @response = {}
+    end
+
     # Fetch data from CoderWall
     def fetch(username)
+      return @response[username] unless @response[username].nil?
+
       uri = uri_for_user(username)
       json = send_request(uri)
 
       begin
-        JSON.parse(json.read)
+        @response[username] = JSON.parse(json.read)
       rescue JSON::ParserError
         raise InvalidJson, 'Received invalid json in response'
       end
