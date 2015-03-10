@@ -11,15 +11,15 @@ module CoderWally
 
     # Fetch data from CoderWall
     def fetch(username)
-      return @response[username] unless @response[username].nil?
+      @response.fetch(username) do
+        uri = uri_for_user(username)
+        json = send_request(uri)
 
-      uri = uri_for_user(username)
-      json = send_request(uri)
-
-      begin
-        @response[username] = JSON.parse(json.read)
-      rescue JSON::ParserError
-        raise InvalidJson, 'Received invalid json in response'
+        begin
+          @response[username] = JSON.parse(json.read)
+        rescue JSON::ParserError
+          raise InvalidJson, 'Received invalid json in response'
+        end
       end
     end
 
