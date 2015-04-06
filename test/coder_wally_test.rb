@@ -3,7 +3,6 @@ require 'coder_wally'
 
 describe 'Coder Wally' do
   before do
-    @client = CoderWally::Client.new
     @accept_encoding = 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3'
     @success_fixture = File.dirname(__FILE__) + '/./fixtures/200.json'
   end
@@ -17,6 +16,7 @@ describe 'Coder Wally' do
                            'Accept-Encoding' => @accept_encoding,
                            'User-Agent' => 'Ruby' })
           .to_return(status: 200, body:  success_response, headers: {})
+        @client = CoderWally::Client.new('me')
       end
 
       it 'returns a hash of badges' do
@@ -32,12 +32,12 @@ describe 'Coder Wally' do
 
     describe 'invalid user' do
       it 'throws an exception when no user is passed in' do
-        err = -> { @client.get_badges_for }.must_raise ArgumentError
+        err = -> { CoderWally::Client.new() }.must_raise ArgumentError
         err.message.must_match(/wrong number/)
       end
 
       it 'throws an exception when empty string is passed in' do
-        err = -> { @client.get_badges_for '' }.must_raise ArgumentError
+        err = -> { CoderWally::Client.new('') }.must_raise ArgumentError
         err.message.must_match(/Please provide a username/)
       end
 
@@ -53,7 +53,7 @@ describe 'Coder Wally' do
         end
 
         it 'throws a UserNotFoundError when the user is not found' do
-          err = -> { @client.get_badges_for('me') }.must_raise UserNotFoundError
+          err = -> { CoderWally::Client.new('me') }.must_raise UserNotFoundError
           err.message.must_match(/User not found/)
         end
       end
@@ -71,7 +71,7 @@ describe 'Coder Wally' do
       end
 
       it 'throws a ServerError when the server response is 500' do
-        err = -> { @client.get_badges_for('me') }.must_raise ServerError
+        err = -> { CoderWally::Client.new('me') }.must_raise ServerError
         err.message.must_match(/Server error/)
       end
     end
@@ -88,7 +88,7 @@ describe 'Coder Wally' do
       end
 
       it 'throws a InvalidJson exception when bad JSON is returned' do
-        err = -> { @client.get_badges_for('me') }.must_raise InvalidJson
+        err = -> { CoderWally::Client.new('me') }.must_raise InvalidJson
         err.message.must_match(/invalid json/)
       end
     end
@@ -102,16 +102,16 @@ describe 'Coder Wally' do
                          'Accept-Encoding' => @accept_encoding,
                          'User-Agent' => 'Ruby' })
         .to_return(status: 200, body:  success_response, headers: {})
+      @client = CoderWally::Client.new('me')
     end
 
     it 'returns a user' do
       user = @client.get_details_for('me')
-
-      user.name.must_equal 'Greg Stewart'
-      user.username.must_equal 'gregstewart'
-      user.location.must_equal 'London, UK'
-      user.team.must_be_nil
-      user.endorsements.must_be_kind_of Integer
+      user[:name].must_equal 'Greg Stewart'
+      user[:username].must_equal 'gregstewart'
+      user[:location].must_equal 'London, UK'
+      user[:team].must_be_nil
+      user[:endorsements].must_be_kind_of Integer
     end
   end
 
@@ -124,6 +124,7 @@ describe 'Coder Wally' do
                          'User-Agent' => 'Ruby' })
         .to_return(status: 200, body:  success_response, headers: {})
 
+      @client = CoderWally::Client.new('me')
       @coder_wall = @client.get_everything_for('me')
     end
 
@@ -142,6 +143,44 @@ describe 'Coder Wally' do
 
     it 'has an accounts property' do
       @coder_wall.accounts.must_be_instance_of CoderWally::Account
+    end
+  end
+
+  describe 'client' do
+    before do
+      success_response = open(File.expand_path(@success_fixture)).read
+      stub_request(:get, 'https://coderwall.com/me.json')
+          .with(headers: { 'Accept' => '*/*',
+                           'Accept-Encoding' => @accept_encoding,
+                           'User-Agent' => 'Ruby' })
+          .to_return(status: 200, body:  success_response, headers: {})
+
+      @client = CoderWally::Client.new('me')
+    end
+
+    it 'exposes a user object' do
+      @client.user.must_be_instance_of CoderWally::User
+    end
+
+    describe 'user' do
+      it 'has a badges collection' do
+        @client.user.badges.count.must_equal 11
+        @client.user.badges.first.must_be_instance_of CoderWally::Badge
+      end
+
+      it 'has an accounts property' do
+        @client.user.accounts.must_be_instance_of CoderWally::Account
+      end
+
+      it 'returns a users details' do
+        details = @client.user.details
+
+        details[:name].must_equal 'Greg Stewart'
+        details[:username].must_equal 'gregstewart'
+        details[:location].must_equal 'London, UK'
+        details[:team].must_be_nil
+        details[:endorsements].must_be_kind_of Integer
+      end
     end
   end
 end
