@@ -22,7 +22,9 @@ module CoderWally
 
     # parse user information from data
     def parse_user(data)
-      User.new(data, parse_badges(data['badges']), parse_accounts(data['accounts']))
+      badges = parse_badges(data['badges'])
+      accounts = parse_accounts(data['accounts'])
+      User.new(data, badges, accounts)
     end
 
     # build CoderWall object from API response
