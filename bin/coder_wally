@@ -2,7 +2,6 @@
 
 require 'coder_wally'
 
-client = CoderWally::Client.new
-coder_wally = client.get_everything_for ARGV[0]
+client = CoderWally::Client.new ARGV[0]
 
-puts coder_wally.inspect
+puts client.user.inspect
