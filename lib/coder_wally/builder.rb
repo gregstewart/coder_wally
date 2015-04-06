@@ -22,16 +22,14 @@ module CoderWally
 
     # parse user information from data
     def parse_user(data)
-      User.new(data)
+      User.new(data, parse_badges(data['badges']), parse_accounts(data['accounts']))
     end
 
     # build CoderWall object from API response
     def build(response)
-      badges = parse_badges(response['badges'])
-      accounts = parse_accounts(response['accounts'])
       user = parse_user(response)
 
-      CoderWall.new badges, user, accounts
+      CoderWall.new user
     end
   end
 end

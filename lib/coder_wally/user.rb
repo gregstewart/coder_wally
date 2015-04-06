@@ -3,15 +3,26 @@ module CoderWally
   # Stores user properties
   class User
     # Object properties
-    attr_reader :name, :username, :location, :team, :endorsements
+    attr_writer :name, :username, :location, :team, :endorsements
+    attr_reader :badges, :accounts, :details
 
     # Initialise object with a hash of values
-    def initialize(data)
+    def initialize(data, badges, accounts)
       @name = data['name']
       @username = data['username']
       @location = data['location']
       @team = data['team']
       @endorsements = data['endorsements']
+
+      @badges = badges
+      @accounts = accounts
+      @details = {
+          name: @name,
+          username: @username,
+          location: @location,
+          team: @team,
+          endorsements: @endorsements
+      }
     end
   end
 end
