@@ -37,18 +37,23 @@ using:
 
 In order to get a user's badges, you do this:
 
-    client = CoderWally::Client.new
-    client.get_badges_for <username>
+    client = CoderWally::Client.new(<username>)
+    client.user.badges
 
 In order to get a user's details, you do this:
 
-    client = CoderWally::Client.new
-    client.get_details_for <username>
+    client = CoderWally::Client.new(<username>)
+    client.user.details
 
-In order to get everything (for now user and badges), you do this:
+In order to get a user's accounts, you do this:
 
-    client = CoderWally::Client.new
-    client.get_everything_for <username>
+    client = CoderWally::Client.new(<username>)
+    client.user.accounts
+
+In order to get everything (for now user, accounts and badges), you do this:
+
+    client = CoderWally::Client.new(<username>)
+    client.user
 
 ## Contributing
 
