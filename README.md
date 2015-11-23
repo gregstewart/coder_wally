@@ -1,9 +1,9 @@
-# CoderWally 
+# CoderWally
 
-[![Build Status](https://circleci.com/gh/gregstewart/coder_wally.svg?style=badge)](https://circleci.com/gh/gregstewart/coder_wally) 
+[![Build Status](https://circleci.com/gh/gregstewart/coder_wally.svg?style=badge)](https://circleci.com/gh/gregstewart/coder_wally)
 
 [![Gem Version](https://badge.fury.io/rb/coder_wally.svg)](http://badge.fury.io/rb/coder_wally)
-[![Coverage Status](https://coveralls.io/repos/gregstewart/coder_wally/badge.svg)](https://coveralls.io/r/gregstewart/coder_wally)
+[![Coverage Status](https://coveralls.io/repos/gregstewart/coder_wally/badge.svg?branch=master&service=github)](https://coveralls.io/github/gregstewart/coder_wally?branch=master)
 [![Code Climate](https://codeclimate.com/github/gregstewart/coder_wally/badges/gpa.svg)](https://codeclimate.com/github/gregstewart/coder_wally)
 [![Dependency Status](https://gemnasium.com/gregstewart/coder_wally.svg)](https://gemnasium.com/gregstewart/coder_wally)
 [![Inline docs](https://inch-ci.org/github/gregstewart/coder_wally.svg?branch=master)](https://inch-ci.org/github/gregstewart/coder_wally)
@@ -29,7 +29,7 @@ Or install it yourself as:
 
 ## Usage
 
-After installing the Gem, you can for now you can invoke it 
+After installing the Gem, you can for now you can invoke it
 (remember to replace <username> with you a valid username) from the command line
 using:
 
