@@ -1,4 +1,3 @@
-require_relative './test_helper'
 require 'minitest/autorun'
 require 'coder_wally/api'
 
